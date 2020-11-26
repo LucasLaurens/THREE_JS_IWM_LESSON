@@ -20,20 +20,21 @@ export default class Main {
 		// Prepare scene
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 1000);
-		this.renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
+		// {alpha: true, antialias: true}
+		this.renderer = new THREE.WebGLRenderer();
 		this.renderer.setSize(window.innerWidth, window.innerHeight);
 
 		// Cube
-		const geometry = new THREE.BoxGeometry();
-		const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-		this.cube = new THREE.Mesh( geometry, material );
+		// const geometry = new THREE.BoxGeometry();
+		// const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+		// this.cube = new THREE.Mesh( geometry, material );
 		// Transform
 		this.camera.position.z = 2;
-		this.cube.rotation.y = Math.PI / 4;
+		// this.cube.rotation.y = Math.PI / 4;
 
 		// Render scene
 		window.addEventListener('resize', this.onResize, false);
-		this.scene.add( this.cube );
+		// this.scene.add( this.cube );
 		document.body.appendChild(this.renderer.domElement);
 		// this.stats = new Stats();
 		// document.body.appendChild(this.stats.dom);
@@ -45,7 +46,24 @@ export default class Main {
 	}
 
 	initObjects() {
-		this.boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+		// Set all objects
+		this.boxGeometry = new THREE.BoxGeometry(.5, .5, .5);
+		this.sphereGeometry = new THREE.SphereGeometry(.3, 12, 12);
+
+		// Set all materials
+		const redMaterial = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+		const greenMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+
+		// Set all mesh
+		this.boxMesh = new THREE.Mesh(this.boxGeometry, redMaterial);
+		this.sphereMesh = new THREE.Mesh(this.sphereGeometry, greenMaterial);
+
+		// Transform Mesh
+		this.sphereMesh.position.x = -1;
+
+		// Scene renderer
+		this.scene.add(this.boxMesh);
+		this.scene.add(this.sphereMesh);
 	}
 
 	onResize() {
