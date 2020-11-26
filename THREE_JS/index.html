@@ -4,9 +4,40 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Three JS IWM Lessons</title>
+
+	<style>
+		body {
+			position: relative;
+			margin: 0;
+			overflow-x: hidden;
+		}
+		header .navbar {
+			width: 100%;
+			height: 3rem;
+			background-color: #ccc;
+		}
+		header .navbar h1 {
+			margin: 0 auto;
+			padding: 1%;
+			color: #444;
+		}
+		.render {
+			display: block;
+			width: 100%;
+			margin: 1rem auto;
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
-
+	<header>
+		<nav class="navbar">
+			<h1>Scene 3D</h1>
+		</nav>
+	</header>
+	<div class="render">
+		<div id="scene"></div>
+	</div>
 	<script type="module" src="main.js"></script>
 </body>
 </html>

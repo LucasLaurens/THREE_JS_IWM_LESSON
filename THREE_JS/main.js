@@ -20,9 +20,9 @@ export default class Main {
 		// Prepare scene
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 1000);
-		// {alpha: true, antialias: true}
-		this.renderer = new THREE.WebGLRenderer();
-		this.renderer.setSize(window.innerWidth, window.innerHeight);
+		// {alpha: true}
+		this.renderer = new THREE.WebGLRenderer({antialias: true});
+		this.renderer.setSize((window.innerWidth / 1.5), (window.innerHeight / 1.5));
 
 		// Cube
 		// const geometry = new THREE.BoxGeometry();
@@ -35,7 +35,7 @@ export default class Main {
 		// Render scene
 		window.addEventListener('resize', this.onResize, false);
 		// this.scene.add( this.cube );
-		document.body.appendChild(this.renderer.domElement);
+		document.getElementById('scene').appendChild(this.renderer.domElement);
 		// this.stats = new Stats();
 		// document.body.appendChild(this.stats.dom);
 
@@ -49,21 +49,36 @@ export default class Main {
 		// Set all objects
 		this.boxGeometry = new THREE.BoxGeometry(.5, .5, .5);
 		this.sphereGeometry = new THREE.SphereGeometry(.3, 12, 12);
+		this.planeGeometry = new THREE.PlaneGeometry(3, 3);
 
 		// Set all materials
-		const redMaterial = new THREE.MeshBasicMaterial( {color: 0xff0000} );
-		const greenMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+		const redMaterial = new THREE.MeshBasicMaterial( {color: 0xff5555} );
+		const greenMaterial = new THREE.MeshBasicMaterial( {color: 0x55ff55} );
+		const whiteMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, side: THREE.DoubleSide} );
 
 		// Set all mesh
 		this.boxMesh = new THREE.Mesh(this.boxGeometry, redMaterial);
 		this.sphereMesh = new THREE.Mesh(this.sphereGeometry, greenMaterial);
+		this.planeMesh = new THREE.Mesh(this.planeGeometry, whiteMaterial);
 
 		// Transform Mesh
 		this.sphereMesh.position.x = -1;
+		this.planeMesh.rotation.x = THREE.Math.degToRad(-90);
+		this.planeMesh.position.y = -1;
+		this.planeMesh.position.z = -1;
+		/**
+		 * Params :
+		 * - THREE.Math.degToRad(45);
+		 * - visible
+		 * - material (THREE.Color : Hex || Object)
+		 * - scale
+		 * - mon_mesh.clone()
+		 */
 
 		// Scene renderer
 		this.scene.add(this.boxMesh);
 		this.scene.add(this.sphereMesh);
+		this.scene.add(this.planeMesh);
 	}
 
 	onResize() {
