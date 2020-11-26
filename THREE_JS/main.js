@@ -4,6 +4,7 @@ import { OrbitControls } from './lib/OrbitControls.js';
 
 // Import some class
 import Objects from './objects.js';
+import Car from './car.js';
 
 export default class Main {
 	constructor() {
@@ -23,8 +24,7 @@ export default class Main {
 		// Prepare scene
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 1000);
-		// {alpha: true}
-		this.renderer = new THREE.WebGLRenderer({antialias: true});
+		this.renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
 		this.renderer.setSize((window.innerWidth / 1.25), (window.innerHeight / 1.25));
 
 		// Cube
@@ -32,6 +32,8 @@ export default class Main {
 		// const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
 		// this.cube = new THREE.Mesh( geometry, material );
 		// Transform
+		this.scene.background = new THREE.Color( 0xcccccc );
+		this.camera.position.y = 1;
 		this.camera.position.z = 2;
 		// this.cube.rotation.y = Math.PI / 4;
 
@@ -50,7 +52,10 @@ export default class Main {
 
 	initObjects() {
 		this.objects = new Objects();
+		this.car = new Car();
+
 		this.scene.add(this.objects);
+		this.scene.add(this.car);
 	}
 
 	onResize() {
