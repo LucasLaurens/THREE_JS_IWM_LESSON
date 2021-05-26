@@ -1,11 +1,10 @@
-import * as THREE from './lib/three.module.js';
-import { OrbitControls } from './lib/OrbitControls.js';
+import * as THREE from './lib/build/three.module.js';
+import { OrbitControls } from './lib/examples/jsm/controls/OrbitControls.js';
 // import Stats from './lib/stats.module.js';
 
 // Import some class
 import Objects from './objects.js';
 import Car from './car.js';
-
 export default class Main {
 	constructor() {
 		// Set
@@ -16,7 +15,7 @@ export default class Main {
 		// Bind scope
 		this.update = this.update.bind(this);
 		this.onResize = this.onResize.bind(this);
-		this.initObjects = this.initObjects.bind(this);
+		// this.initObjects = this.initObjects.bind(this);
 		this.init();
 	}
 
@@ -24,30 +23,30 @@ export default class Main {
 		// Prepare scene
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 1000);
-		this.renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
-		this.renderer.setSize((window.innerWidth / 1.25), (window.innerHeight / 1.25));
+		this.renderer = new THREE.WebGLRenderer({ antialias: true});
+		this.renderer.setSize((window.innerWidth) / 1.25, (window.innerHeight) / 1.25);
 
 		// Cube
 		// const geometry = new THREE.BoxGeometry();
-		// const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+		// const material = new THREE.MeshBasicMaterial( {color: 0xff0000} );
 		// this.cube = new THREE.Mesh( geometry, material );
+		// this.scene.add( this.cube );
 		// Transform
-		this.scene.background = new THREE.Color( 0xcccccc );
-		this.camera.position.y = 1;
 		this.camera.position.z = 2;
+		// this.camera.position.y = 1;
 		// this.cube.rotation.y = Math.PI / 4;
 
 		// Render scene
 		window.addEventListener('resize', this.onResize, false);
-		// this.scene.add( this.cube );
 		document.getElementById('scene').appendChild(this.renderer.domElement);
 		// this.stats = new Stats();
 		// document.body.appendChild(this.stats.dom);
 
 		// Control scene
+		// this.renderer.render(this.scene, this.camera);
 		new OrbitControls(this.camera, this.renderer.domElement);
-		this.update();
 		this.initObjects();
+		this.update();
 	}
 
 	initObjects() {

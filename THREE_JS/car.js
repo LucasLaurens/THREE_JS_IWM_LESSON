@@ -1,25 +1,26 @@
-import * as THREE from './lib/three.module.js';
-import { GLTFLoader } from './lib/GLTFLoader.js';
+import * as THREE from './lib/build/three.module.js';
+import { GLTFLoader } from './lib/examples/jsm/loaders/GLTFLoader.js';
 
 export default class Car extends THREE.Object3D {
 	constructor() {
 		super();
 
 		// Init
-		const greyMaterial = new THREE.MeshBasicMaterial( {color: 0xCCCCCC} );
+		const greyMaterial = new THREE.MeshBasicMaterial( {color: 0x5555ff} );
 
 		// Load 3D Object as model
 		const loader = new GLTFLoader();
-		loader.load('./assets/ferrari.glb', (object) => {
+		loader.load('./assets/spaceship.glb', (object) => {
 			object.scene.children.map(item => {
 				console.log(item.type)
 
 				if (item.isMesh) {
 					item.material = greyMaterial;
+					item.position.set(0, 0.2, 0);
+					item.scale.set(0.001, 0.001, 0.001);
+					this.add(item);
 				}
 
-				item.position.set(0, 0.2, 0);
-				this.add(item);
 			});
 		});
 	}
