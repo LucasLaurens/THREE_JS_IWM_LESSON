@@ -20,9 +20,9 @@ export default class Objects extends THREE.Object3D {
 		this.planeMesh = new THREE.Mesh(this.planeGeometry, whiteMaterial);
         
 		// Transform Mesh
-		this.boxMesh.position.x = 0.5;
-        this.sphereMesh.position.x = -0.5;
-        this.sphereMesh.position.y = 0.5;
+		this.boxMesh.position.x = -0.7;
+        this.sphereMesh.position.x = -0.7;
+        this.sphereMesh.position.y = 0.6;
 		this.planeMesh.rotation.x = THREE.Math.degToRad(-90);
 
 		// shadow

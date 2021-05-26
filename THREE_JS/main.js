@@ -37,6 +37,7 @@ export default class Main {
 		// this.cube = new THREE.Mesh( geometry, material );
 		// this.scene.add( this.cube );
 		// Transform
+		this.camera.position.y = 1;
 		this.camera.position.z = 2;
 		// this.camera.position.y = 1;
 		// this.cube.rotation.y = Math.PI / 4;
@@ -61,6 +62,10 @@ export default class Main {
 		this.dlight.position.y = 5;
 		this.dlight.position.z = 5;
 
+		// ambiant light
+		this.alight = new THREE.AmbientLight();
+		this.alight.intensity = 0.3;
+
 		// shadow
 		this.dlight.castShadow = true;
 		this.dlight.shadow.mapSize.width = 2048;
@@ -77,6 +82,7 @@ export default class Main {
 
 		this.scene.add(this.helper);
 		this.scene.add(this.dlight);
+		this.scene.add(this.alight);
 		this.scene.add(this.objects);
 		this.scene.add(this.car);
 	}
@@ -95,7 +101,15 @@ export default class Main {
 		// Animation
 		requestAnimationFrame(this.update);
 
-		// this.dlight && (this.dlight.position.x += -0.01);
+		// if(this.dlight) {
+		// 	this.dlight.position.x
+		// 	if(-2 < this.dlight.position.x) {
+		// 		this.dlight.position.x += -0.01;
+		// 	} else {
+		// 		this.dlight.position.x = -2;
+		// 	}
+		// }
+
 		// this.helper && this.helper.update();
 
 		// this.cube.rotation.x += .01;
