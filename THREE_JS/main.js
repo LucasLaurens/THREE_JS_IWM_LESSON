@@ -101,6 +101,9 @@ export default class Main {
 		// Animation
 		requestAnimationFrame(this.update);
 
+		// update
+		this.objects && this.objects.update();
+
 		// if(this.dlight) {
 		// 	this.dlight.position.x
 		// 	if(-2 < this.dlight.position.x) {

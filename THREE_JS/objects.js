@@ -4,6 +4,9 @@ export default class Objects extends THREE.Object3D {
 	constructor() {
 		super();
 
+		// Bind scope
+		this.update = this.update.bind(this);
+
 		// Set all objects
 		this.boxGeometry = new THREE.BoxGeometry(.5, .5, .5);
 		this.sphereGeometry = new THREE.SphereGeometry(.3, 24, 24);
@@ -21,8 +24,9 @@ export default class Objects extends THREE.Object3D {
         
 		// Transform Mesh
 		this.boxMesh.position.x = -0.7;
+		this.boxMesh.position.y = 0.35;
         this.sphereMesh.position.x = -0.7;
-        this.sphereMesh.position.y = 0.6;
+        this.sphereMesh.position.y = 1.005;
 		this.planeMesh.rotation.x = THREE.Math.degToRad(-90);
 
 		// shadow
@@ -50,5 +54,9 @@ export default class Objects extends THREE.Object3D {
 		 * Object3D est le parent
 		 * Mesh irrite de Object3D
 		 */
+	}
+
+	update() {
+		this.boxMesh.rotation.x += THREE.Math.degToRad(1);
 	}
 }

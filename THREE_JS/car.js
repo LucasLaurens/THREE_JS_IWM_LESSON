@@ -5,6 +5,9 @@ export default class Car extends THREE.Object3D {
 	constructor() {
 		super();
 
+		// Bind scope
+		this.update = this.update.bind(this);
+
 		// Init
 		const greyMaterial = new THREE.MeshStandardMaterial({color: 0x5555ff, side: THREE.DoubleSide});
 
@@ -29,5 +32,8 @@ export default class Car extends THREE.Object3D {
 
 			});
 		});
+	}
+
+	update() {
 	}
 }
