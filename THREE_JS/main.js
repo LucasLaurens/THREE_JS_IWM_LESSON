@@ -15,7 +15,8 @@ export default class Main {
 		// Bind scope
 		this.update = this.update.bind(this);
 		this.onResize = this.onResize.bind(this);
-		// this.initObjects = this.initObjects.bind(this);
+		this.initObjects = this.initObjects.bind(this);
+
 		this.init();
 	}
 
@@ -24,7 +25,11 @@ export default class Main {
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 1000);
 		this.renderer = new THREE.WebGLRenderer({ antialias: true});
+		// Shadow settings
+		this.renderer.shadowMap.enabled = true;
+
 		this.renderer.setSize((window.innerWidth) / 1.25, (window.innerHeight) / 1.25);
+
 
 		// Cube
 		// const geometry = new THREE.BoxGeometry();
@@ -50,9 +55,28 @@ export default class Main {
 	}
 
 	initObjects() {
+		// init light
+		this.dlight = new THREE.DirectionalLight();
+		this.dlight.position.x = 5;
+		this.dlight.position.y = 5;
+		this.dlight.position.z = 5;
+
+		// shadow
+		this.dlight.castShadow = true;
+		this.dlight.shadow.mapSize.width = 2048;
+		this.dlight.shadow.mapSize.height = 2048;
+		this.dlight.shadow.radius = 3;
+		this.dlight.shadow.bias = -0.0001;
+
+		// Light helper
+		this.helper = new THREE.DirectionalLightHelper(this.dlight, 1);
+
+		// init elements
 		this.objects = new Objects();
 		this.car = new Car();
 
+		this.scene.add(this.helper);
+		this.scene.add(this.dlight);
 		this.scene.add(this.objects);
 		this.scene.add(this.car);
 	}
@@ -70,6 +94,10 @@ export default class Main {
 	update() {
 		// Animation
 		requestAnimationFrame(this.update);
+
+		// this.dlight && (this.dlight.position.x += -0.01);
+		// this.helper && this.helper.update();
+
 		// this.cube.rotation.x += .01;
 		// this.cube.rotation.y += .01;
 		// this.cube.rotation.z += .01;
