@@ -12,10 +12,20 @@ export default class Objects extends THREE.Object3D {
 		this.sphereGeometry = new THREE.SphereGeometry(.3, 24, 24);
 		this.planeGeometry = new THREE.PlaneGeometry(5, 5);
 
+		// Map
+		this.planeMap = new THREE.TextureLoader().load("./assets/sky.jpg");
+		this.planeMap.anisotropy = 12;
+		this.planeMap.wrapS = this.planeMap.wrapT = THREE.RepeatWrapping;
+		// this.planeMap.repeat.set(2, 2);
+		// this.planeMap.offset.set(2, 2);
+		// this.planeMap.rotation = THREE.Math.degToRad(30);
+
 		// Set all materials
 		const redMaterial = new THREE.MeshStandardMaterial( {color: 0xff5555} );
 		const greenMaterial = new THREE.MeshStandardMaterial( {color: 0x55ff55} );
 		const whiteMaterial = new THREE.MeshStandardMaterial( {color: 0xffffff, side: THREE.DoubleSide} );
+
+		whiteMaterial.map = this.planeMap;
 
 		// Set all mesh
 		this.boxMesh = new THREE.Mesh(this.boxGeometry, redMaterial);
@@ -58,5 +68,7 @@ export default class Objects extends THREE.Object3D {
 
 	update() {
 		this.boxMesh.rotation.x += THREE.Math.degToRad(1);
+
+		// this.planeMap.offset.x += 0.01;
 	}
 }
