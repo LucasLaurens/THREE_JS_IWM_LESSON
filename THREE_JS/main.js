@@ -31,6 +31,15 @@ export default class Main {
 		this.renderer.setSize((window.innerWidth) / 1.25, (window.innerHeight) / 1.25);
 
 
+		// Background
+		// this.scene.background = new THREE.Color(0x6ee7ff);
+		this.scene.fog = new THREE.FogExp2(0x000000, 0.1);
+		// this.bgTexture = new THREE.TextureLoader().load("./assets/sky_equi.jpeg", () => {
+		// 	this.bgEquiMap = new THREE.WebGLCubeRenderTarget(1024).fromEquirectangularTexture(this.renderer, this.bgTexture);
+		// 	this.scene.background = this.bgEquiMap;
+		// });
+
+
 		// Cube
 		// const geometry = new THREE.BoxGeometry();
 		// const material = new THREE.MeshBasicMaterial( {color: 0xff0000} );
@@ -64,7 +73,7 @@ export default class Main {
 
 		// ambiant light
 		this.alight = new THREE.AmbientLight();
-		this.alight.intensity = 0.3;
+		this.alight.intensity = 0.5;
 
 		// shadow
 		this.dlight.castShadow = true;
@@ -103,6 +112,7 @@ export default class Main {
 
 		// update
 		this.objects && this.objects.update();
+		this.car && this.car.update();
 
 		// if(this.dlight) {
 		// 	this.dlight.position.x

@@ -7,14 +7,16 @@ export default class Car extends THREE.Object3D {
 
 		// Bind scope
 		this.update = this.update.bind(this);
+		this.moove = this.moove.bind(this);
 
 		// Init
 		const greyMaterial = new THREE.MeshStandardMaterial({color: 0x5555ff, side: THREE.DoubleSide});
 
 		// Load 3D Object as model
-		const loader = new GLTFLoader();
-		loader.load('./assets/spaceship.glb', (object) => {
-			object.scene.children.map(item => {
+		this.loader = new GLTFLoader();
+		this.loader.load('./assets/spaceship.glb', (object) => {
+			this.sceneObject = object.scene
+			this.sceneObject.children.map(item => {
 				console.log(item.type)
 
 				if (item.isMesh) {
@@ -30,11 +32,17 @@ export default class Car extends THREE.Object3D {
 					// rendering
 					this.add(item);
 				}
-
 			});
 		});
+
+		console.log(this.loader)
 	}
 
 	update() {
+	
+	}
+
+	moove() {
+		// document.onkeydown = applyKey;
 	}
 }

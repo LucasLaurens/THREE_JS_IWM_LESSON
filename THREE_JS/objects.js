@@ -11,7 +11,7 @@ export default class Objects extends THREE.Object3D {
 		// Set all objects
 		// this.boxGeometry = new THREE.BoxGeometry(.5, .5, .5);
 		// this.sphereGeometry = new THREE.SphereGeometry(.3, 24, 24);
-		this.planeGeometry = new THREE.PlaneGeometry(5, 5);
+		this.planeGeometry = new THREE.PlaneGeometry(50, 50);
 
 		// Map
 		// this.planeMap = new THREE.TextureLoader().load("./assets/sky.jpg");
