@@ -19,8 +19,9 @@ export default class Car extends THREE.Object3D {
 
 				if (item.isMesh) {
 					item.material = greyMaterial;
-					item.position.set(0, 0.2, 0);
+					item.position.set(-1.5, 0.2, 0);
 					item.scale.set(0.001, 0.001, 0.001);
+					item.rotation.y += THREE.Math.degToRad(90);
 					
 					// shadow
 					item.castShadow = true;

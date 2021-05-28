@@ -1,5 +1,5 @@
-# THREE_JS_IWM_LESSON
+# THREE JS LESSON
 
-```
-http-server . -p {port}
-```
+## Start a server to read 3D
+- npm i http-server -g
+- http-server . -p {port}
