@@ -1,4 +1,5 @@
 import * as THREE from './lib/build/three.module.js';
+import Global from './global.js';
 
 export default class Objects extends THREE.Object3D {
 	constructor() {
@@ -25,9 +26,18 @@ export default class Objects extends THREE.Object3D {
 		const redMaterial = new THREE.MeshStandardMaterial( {color: 0xff5555} );
 		const greenMaterial = new THREE.MeshStandardMaterial( {color: 0x55ff55} );
 		const wisteriaMaterial = new THREE.MeshStandardMaterial( {color: 0x8e44ad} );
+		const basicMaterial = new THREE.MeshStandardMaterial( {color: 0xffffff} );
 		const whiteMaterial = new THREE.MeshStandardMaterial( {color: 0xffffff, side: THREE.DoubleSide} );
 
+		// TEXTURE
+		basicMaterial.map = new THREE.TextureLoader().load("./assets/box.jpg");
+		// basicMaterial.transparent = true
+
+		
 		whiteMaterial.map = this.planeMap;
+		// basicMaterial.metalness = .1;
+		// basicMaterial.roughness = .3;
+		// basicMaterial.envMap = Global._instance.envMap;
 
 		// Set all mesh
 		// this.boxMesh = new THREE.Mesh(this.boxGeometry, redMaterial);
@@ -38,7 +48,7 @@ export default class Objects extends THREE.Object3D {
 		this.arrayMesh = []
 		for(let i = -3; i <= 3; i++) {
 			this.boxGeometry = new THREE.BoxGeometry(.5, 1, .5);
-			this.boxMesh = new THREE.Mesh(this.boxGeometry, wisteriaMaterial);
+			this.boxMesh = new THREE.Mesh(this.boxGeometry, basicMaterial);
 
 			this.boxMesh.position.x = i * .5;
 			this.boxMesh.position.z = i * .5;
@@ -50,8 +60,6 @@ export default class Objects extends THREE.Object3D {
 			this.add(this.boxMesh);
 			this.arrayMesh.push(this.boxMesh)
 		}
-
-		console.log(this.arrayMesh)
         
 		// Transform Mesh
 		// this.boxMesh.position.x = -0.7;

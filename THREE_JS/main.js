@@ -3,8 +3,9 @@ import { OrbitControls } from './lib/examples/jsm/controls/OrbitControls.js';
 // import Stats from './lib/stats.module.js';
 
 // Import some class
+import Global from './global.js';
 import Objects from './objects.js';
-import Car from './car.js';
+// import Car from './car.js';
 export default class Main {
 	constructor() {
 		// Set
@@ -27,17 +28,20 @@ export default class Main {
 		this.renderer = new THREE.WebGLRenderer({ antialias: true});
 		// Shadow settings
 		this.renderer.shadowMap.enabled = true;
-
 		this.renderer.setSize((window.innerWidth) / 1.25, (window.innerHeight) / 1.25);
 
 
 		// Background
 		// this.scene.background = new THREE.Color(0x6ee7ff);
 		this.scene.fog = new THREE.FogExp2(0x000000, 0.1);
-		// this.bgTexture = new THREE.TextureLoader().load("./assets/sky_equi.jpeg", () => {
-		// 	this.bgEquiMap = new THREE.WebGLCubeRenderTarget(1024).fromEquirectangularTexture(this.renderer, this.bgTexture);
-		// 	this.scene.background = this.bgEquiMap;
-		// });
+		this.bgTexture = new THREE.TextureLoader().load("./assets/sky_equi.jpg", () => {
+			this.bgEquiMap = new THREE.WebGLCubeRenderTarget(1024).fromEquirectangularTexture(this.renderer, this.bgTexture);
+			console.log(this.bgEquiMap)
+			// Global._instance.envMap = this.bgEquiMap;
+			this.scene.background = this.bgEquiMap;
+
+			this.initObjects();
+		});
 
 
 		// Cube
@@ -60,7 +64,6 @@ export default class Main {
 		// Control scene
 		// this.renderer.render(this.scene, this.camera);
 		new OrbitControls(this.camera, this.renderer.domElement);
-		this.initObjects();
 		this.update();
 	}
 
@@ -87,13 +90,13 @@ export default class Main {
 
 		// init elements
 		this.objects = new Objects();
-		this.car = new Car();
+		// this.car = new Car();
 
 		this.scene.add(this.helper);
 		this.scene.add(this.dlight);
 		this.scene.add(this.alight);
 		this.scene.add(this.objects);
-		this.scene.add(this.car);
+		// this.scene.add(this.car);
 	}
 
 	onResize() {
@@ -112,7 +115,7 @@ export default class Main {
 
 		// update
 		this.objects && this.objects.update();
-		this.car && this.car.update();
+		// this.car && this.car.update();
 
 		// if(this.dlight) {
 		// 	this.dlight.position.x
