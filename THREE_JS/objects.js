@@ -35,9 +35,10 @@ export default class Objects extends THREE.Object3D {
 
 		
 		whiteMaterial.map = this.planeMap;
-		basicMaterial.metalness = .1;
-		basicMaterial.roughness = .3;
+		basicMaterial.metalness = .5;
+		basicMaterial.roughness = .1;
 		basicMaterial.envMap = Global.instance.envMap;
+		basicMaterial.envMapIntensity = .3;
 
 		// Set all mesh
 		// this.boxMesh = new THREE.Mesh(this.boxGeometry, redMaterial);

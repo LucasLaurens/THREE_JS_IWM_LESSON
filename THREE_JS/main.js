@@ -36,7 +36,6 @@ export default class Main {
 		this.scene.fog = new THREE.FogExp2(0x000000, 0.1);
 		this.bgTexture = new THREE.TextureLoader().load("./assets/sky_equi.jpg", () => {
 			this.bgEquiMap = new THREE.WebGLCubeRenderTarget(1024).fromEquirectangularTexture(this.renderer, this.bgTexture);
-			console.log(this.bgEquiMap)
 			Global.instance.envMap = this.bgEquiMap;
 			this.scene.background = this.bgEquiMap;
 
