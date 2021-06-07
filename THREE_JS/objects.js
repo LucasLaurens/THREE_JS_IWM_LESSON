@@ -26,7 +26,7 @@ export default class Objects extends THREE.Object3D {
 		const redMaterial = new THREE.MeshStandardMaterial( {color: 0xff5555} );
 		const greenMaterial = new THREE.MeshStandardMaterial( {color: 0x55ff55} );
 		const wisteriaMaterial = new THREE.MeshStandardMaterial( {color: 0x8e44ad} );
-		const basicMaterial = new THREE.MeshStandardMaterial( {color: 0xffffff} );
+		const basicMaterial = new THREE.MeshStandardMaterial( {color: 0xffffff, side: THREE.DoubleSide} );
 		const whiteMaterial = new THREE.MeshStandardMaterial( {color: 0xffffff, side: THREE.DoubleSide} );
 
 		// TEXTURE
@@ -35,9 +35,9 @@ export default class Objects extends THREE.Object3D {
 
 		
 		whiteMaterial.map = this.planeMap;
-		// basicMaterial.metalness = .1;
-		// basicMaterial.roughness = .3;
-		// basicMaterial.envMap = Global._instance.envMap;
+		basicMaterial.metalness = .1;
+		basicMaterial.roughness = .3;
+		basicMaterial.envMap = Global.instance.envMap;
 
 		// Set all mesh
 		// this.boxMesh = new THREE.Mesh(this.boxGeometry, redMaterial);
