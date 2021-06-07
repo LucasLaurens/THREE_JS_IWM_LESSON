@@ -4,7 +4,7 @@ class Global {
     */
     constructor() {}
 
-    getInstance() {
+    get instance() {
         if(!this._instance) {
            this._instance = {};
         }
